@@ -24,28 +24,6 @@ const currencyAmount = {
   "ONE HUNDRED": 100,
 };
 
-// const findChange = (change, cid) => {
-//   let result = [];
-
-//   for (let i = 0; i < cid.reverse().length; i++) {
-//     if (change < values[cid[i][0]] || cid[i][1] === 0) {
-//       continue;
-//     }
-
-//     change -= values[cid[i][0]];
-
-//     if (change === 0) {
-//       result.push([cid[i][0], values[cid[i][0]]]);
-//     }
-//   }
-
-//   if (change !== 0) {
-//     return [];
-//   }
-
-//   return result;
-// };
-
 const findChange = (change, cid) => {
   const keys = Object.keys(currencyAmount);
   const values = Object.values(currencyAmount);
@@ -72,8 +50,6 @@ const findChange = (change, cid) => {
     cid[i][1] -= values[i];
 
     console.log(resultObj);
-
-    // if insufficient amount / money left, break out
   }
 
   return Object.entries(resultObj);
