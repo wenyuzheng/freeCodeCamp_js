@@ -56,6 +56,10 @@ const findChange = (change, cid) => {
   while (change !== "0.00") {
     console.log(i);
 
+    if (i === -1) {
+      return [];
+    }
+
     if (change < values[i] || cid[i][1] === 0) {
       i--;
       continue;
