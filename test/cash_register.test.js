@@ -1,4 +1,8 @@
-const { checkCashRegister, calculateTotalCid } = require("../cash_register");
+const {
+  checkCashRegister,
+  calculateTotalCid,
+  findChange,
+} = require("../cash_register");
 
 describe("calculateTotalCid", () => {
   test("eg1", () => {
@@ -106,6 +110,59 @@ describe("cash_register", () => {
         ["ONE HUNDRED", 0],
       ],
     };
+    expect(result).toEqual(expected);
+  });
+
+  // test("Open eg1", () => {
+  //   const result = checkCashRegister(19.5, 20, [
+  //     ["PENNY", 1.01],
+  //     ["NICKEL", 2.05],
+  //     ["DIME", 3.1],
+  //     ["QUARTER", 4.25],
+  //     ["ONE", 90],
+  //     ["FIVE", 55],
+  //     ["TEN", 20],
+  //     ["TWENTY", 60],
+  //     ["ONE HUNDRED", 100],
+  //   ]);
+  //   const expected = {
+  //     status: "OPEN",
+  //     change: [["QUARTER", 0.5]],
+  //   };
+  //   expect(result).toEqual(expected);
+  // });
+});
+
+describe("findChange", () => {
+  test("eg1", () => {
+    const result = findChange(100, [
+      ["PENNY", 0],
+      ["NICKEL", 0],
+      ["DIME", 0],
+      ["QUARTER", 0],
+      ["ONE", 0],
+      ["FIVE", 0],
+      ["TEN", 0],
+      ["TWENTY", 0],
+      ["ONE HUNDRED", 200],
+    ]);
+    const expected = [["ONE HUNDRED", 100]];
+    expect(result).toEqual(expected);
+  });
+
+  test("eg2", () => {
+    const result = findChange(101, [
+      ["PENNY", 0],
+      ["NICKEL", 0],
+      ["DIME", 0],
+      ["QUARTER", 0],
+      ["ONE", 0],
+      ["FIVE", 0],
+      ["TEN", 0],
+      ["TWENTY", 0],
+      ["ONE HUNDRED", 100],
+    ]);
+    const expected = [];
     expect(result).toEqual(expected);
   });
 });
