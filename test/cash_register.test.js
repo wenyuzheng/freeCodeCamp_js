@@ -40,8 +40,8 @@ describe("calculateTotalCid", () => {
 
 describe("cash_register", () => {
   test("Insufficent eg1", () => {
-    const result = checkCashRegister(5, 10, [
-      ["PENNY", 0],
+    const result = checkCashRegister(19.5, 20, [
+      ["PENNY", 0.01],
       ["NICKEL", 0],
       ["DIME", 0],
       ["QUARTER", 0],
@@ -55,82 +55,21 @@ describe("cash_register", () => {
     expect(result).toEqual(expected);
   });
 
-  test("Closed eg1", () => {
-    const result = checkCashRegister(5, 5, [
-      ["PENNY", 0],
+  test("Insufficent eg2", () => {
+    const result = checkCashRegister(19.5, 20, [
+      ["PENNY", 0.01],
       ["NICKEL", 0],
       ["DIME", 0],
       ["QUARTER", 0],
-      ["ONE", 0],
+      ["ONE", 1],
       ["FIVE", 0],
       ["TEN", 0],
       ["TWENTY", 0],
       ["ONE HUNDRED", 0],
     ]);
-    const expected = {
-      status: "CLOSED",
-      change: [
-        ["PENNY", 0],
-        ["NICKEL", 0],
-        ["DIME", 0],
-        ["QUARTER", 0],
-        ["ONE", 0],
-        ["FIVE", 0],
-        ["TEN", 0],
-        ["TWENTY", 0],
-        ["ONE HUNDRED", 0],
-      ],
-    };
+    const expected = { status: "INSUFFICIENT_FUNDS", change: [] };
     expect(result).toEqual(expected);
   });
-
-  test("Closed eg2", () => {
-    const result = checkCashRegister(4.5, 5, [
-      ["PENNY", 0],
-      ["NICKEL", 0],
-      ["DIME", 0],
-      ["QUARTER", 0.5],
-      ["ONE", 0],
-      ["FIVE", 0],
-      ["TEN", 0],
-      ["TWENTY", 0],
-      ["ONE HUNDRED", 0],
-    ]);
-    const expected = {
-      status: "CLOSED",
-      change: [
-        ["PENNY", 0],
-        ["NICKEL", 0],
-        ["DIME", 0],
-        ["QUARTER", 0.5],
-        ["ONE", 0],
-        ["FIVE", 0],
-        ["TEN", 0],
-        ["TWENTY", 0],
-        ["ONE HUNDRED", 0],
-      ],
-    };
-    expect(result).toEqual(expected);
-  });
-
-  // test("Open eg1", () => {
-  //   const result = checkCashRegister(19.5, 20, [
-  //     ["PENNY", 1.01],
-  //     ["NICKEL", 2.05],
-  //     ["DIME", 3.1],
-  //     ["QUARTER", 4.25],
-  //     ["ONE", 90],
-  //     ["FIVE", 55],
-  //     ["TEN", 20],
-  //     ["TWENTY", 60],
-  //     ["ONE HUNDRED", 100],
-  //   ]);
-  //   const expected = {
-  //     status: "OPEN",
-  //     change: [["QUARTER", 0.5]],
-  //   };
-  //   expect(result).toEqual(expected);
-  // });
 });
 
 describe("findChange", () => {

@@ -1,10 +1,19 @@
 function checkCashRegister(price, cash, cid) {
   const change = cash - price;
-  if (change === calculateTotalCid(cid)) {
-    return { status: "CLOSED", change: cid };
-  } else if (change > calculateTotalCid(cid)) {
-    return { status: "INSUFFICIENT_FUNDS", change: [] };
+
+  const changesArr = findChange(change, cid);
+
+  console.log(changesArr);
+
+  if (changesArr.length === 0) {
+    return { status: "INSUFFICIENT_FUNDS", change: changesArr };
+  } else {
+    return { status: "OPEN", change: changesArr };
   }
+
+  // if (change === calculateTotalCid(cid)) {
+  //   return { status: "CLOSED", change: cid };
+  // }
 }
 
 const calculateTotalCid = (cid) => {
@@ -32,7 +41,7 @@ const findChange = (change, cid) => {
   const resultObj = {};
 
   while (change !== "0.00") {
-    console.log(i);
+    // console.log(i);
 
     if (i === -1) {
       return [];
@@ -49,7 +58,7 @@ const findChange = (change, cid) => {
       : values[i];
     cid[i][1] -= values[i];
 
-    console.log(resultObj);
+    // console.log(resultObj);
   }
 
   return Object.entries(resultObj);
