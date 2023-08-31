@@ -12,9 +12,11 @@ const values = {
 
 function checkCashRegister(price, cash, cid) {
   const change = cash - price;
-  if (change === calculateTotalCid(cid))
+  if (change === calculateTotalCid(cid)) {
     return { status: "CLOSED", change: cid };
-  return { status: "INSUFFICIENT_FUNDS", change: [] };
+  } else if (change > calculateTotalCid(cid)) {
+    return { status: "INSUFFICIENT_FUNDS", change: [] };
+  }
 }
 
 const calculateTotalCid = (cid) => {
