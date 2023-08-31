@@ -3,11 +3,11 @@ function checkCashRegister(price, cash, cid) {
 
   const changesArr = findChange(change, cid);
 
-  console.log(changesArr);
-
   if (changesArr.length === 0) {
     return { status: "INSUFFICIENT_FUNDS", change: changesArr };
   } else {
+    console.log({ change, changesArr });
+
     return { status: "OPEN", change: changesArr };
   }
 
@@ -60,6 +60,8 @@ const findChange = (change, cid) => {
 
     // console.log(resultObj);
   }
+
+  console.log(Object.entries(resultObj));
 
   return Object.entries(resultObj);
 };
