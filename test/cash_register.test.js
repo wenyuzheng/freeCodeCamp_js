@@ -166,19 +166,62 @@ describe("findChange", () => {
   //   expect(result).toEqual(expected);
   // });
 
-  // test("eg3", () => {
-  //   const result = findChange(100, [
-  //     ["PENNY", 0],
-  //     ["NICKEL", 0],
-  //     ["DIME", 0],
-  //     ["QUARTER", 0],
-  //     ["ONE", 0],
-  //     ["FIVE", 0],
-  //     ["TEN", 0],
-  //     ["TWENTY", 100],
-  //     ["ONE HUNDRED", 0],
-  //   ]);
-  //   const expected = [["TWENTY", 100]];
-  //   expect(result).toEqual(expected);
-  // });
+  test("eg3", () => {
+    const result = findChange(100, [
+      ["PENNY", 0],
+      ["NICKEL", 0],
+      ["DIME", 0],
+      ["QUARTER", 0],
+      ["ONE", 0],
+      ["FIVE", 0],
+      ["TEN", 0],
+      ["TWENTY", 100],
+      ["ONE HUNDRED", 0],
+    ]);
+    const expected = [["TWENTY", 100]];
+    expect(result).toEqual(expected);
+  });
+
+  test("eg4", () => {
+    const result = findChange(90, [
+      ["PENNY", 0],
+      ["NICKEL", 0],
+      ["DIME", 0],
+      ["QUARTER", 0],
+      ["ONE", 0],
+      ["FIVE", 0],
+      ["TEN", 20],
+      ["TWENTY", 100],
+      ["ONE HUNDRED", 0],
+    ]);
+    const expected = [
+      ["TWENTY", 80],
+      ["TEN", 10],
+    ];
+    expect(result).toEqual(expected);
+  });
+
+  test("eg5", () => {
+    const result = findChange(96.74, [
+      ["PENNY", 1.01],
+      ["NICKEL", 2.05],
+      ["DIME", 3.1],
+      ["QUARTER", 4.25],
+      ["ONE", 90],
+      ["FIVE", 55],
+      ["TEN", 20],
+      ["TWENTY", 60],
+      ["ONE HUNDRED", 100],
+    ]);
+    const expected = [
+      ["TWENTY", 60],
+      ["TEN", 20],
+      ["FIVE", 15],
+      ["ONE", 1],
+      ["QUARTER", 0.5],
+      ["DIME", 0.2],
+      ["PENNY", 0.04],
+    ];
+    expect(result).toEqual(expected);
+  });
 });

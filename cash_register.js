@@ -49,20 +49,25 @@ const currencyAmount = {
 const findChange = (change, cid) => {
   const keys = Object.keys(currencyAmount);
   const values = Object.values(currencyAmount);
-  let currIndex = values.length - 1;
+  let i = values.length - 1;
 
   const resultObj = {};
 
-  while (change !== 0) {
-    if (change < values[currIndex]) {
-      currIndex--;
+  while (change !== "0.00") {
+    console.log(i);
+
+    if (change < values[i] || cid[i][1] === 0) {
+      i--;
       continue;
     }
 
-    change -= values[currIndex];
-    resultObj[keys[currIndex]] = resultObj[keys[currIndex]]
-      ? resultObj[keys[currIndex]] + values[currIndex]
-      : values[currIndex];
+    change = Number(change - values[i]).toFixed(2);
+    resultObj[keys[i]] = resultObj[keys[i]]
+      ? resultObj[keys[i]] + values[i]
+      : values[i];
+    cid[i][1] -= values[i];
+
+    console.log(resultObj);
 
     // if insufficient amount / money left, break out
   }
