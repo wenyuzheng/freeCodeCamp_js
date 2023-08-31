@@ -12,7 +12,7 @@ const calculateTotalCid = (cid) => {
   return total;
 };
 
-const values = {
+const currencyAmount = {
   PENNY: 0.01,
   NICKEL: 0.05,
   DIME: 0.1,
@@ -24,26 +24,50 @@ const values = {
   "ONE HUNDRED": 100,
 };
 
-const findChange = (change, cid) => {
-  let result = [];
+// const findChange = (change, cid) => {
+//   let result = [];
 
-  for (let i = 0; i < cid.reverse().length; i++) {
-    if (change < values[cid[i][0]]) {
+//   for (let i = 0; i < cid.reverse().length; i++) {
+//     if (change < values[cid[i][0]] || cid[i][1] === 0) {
+//       continue;
+//     }
+
+//     change -= values[cid[i][0]];
+
+//     if (change === 0) {
+//       result.push([cid[i][0], values[cid[i][0]]]);
+//     }
+//   }
+
+//   if (change !== 0) {
+//     return [];
+//   }
+
+//   return result;
+// };
+
+const findChange = (change, cid) => {
+  const keys = Object.keys(currencyAmount);
+  const values = Object.values(currencyAmount);
+  let currIndex = values.length - 1;
+
+  const resultObj = {};
+
+  while (change !== 0) {
+    if (change < values[currIndex]) {
+      currIndex--;
       continue;
     }
 
-    change -= values[cid[i][0]];
+    change -= values[currIndex];
+    resultObj[keys[currIndex]] = resultObj[keys[currIndex]]
+      ? resultObj[keys[currIndex]] + values[currIndex]
+      : values[currIndex];
 
-    if (change === 0) {
-      result.push([cid[i][0], values[cid[i][0]]]);
-    }
+    // if insufficient amount / money left, break out
   }
 
-  if (change !== 0) {
-    return [];
-  }
-
-  return result;
+  return Object.entries(resultObj);
 };
 
 module.exports = { checkCashRegister, calculateTotalCid, findChange };
